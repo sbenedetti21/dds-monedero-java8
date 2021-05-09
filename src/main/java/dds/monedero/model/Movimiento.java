@@ -3,6 +3,9 @@ package dds.monedero.model;
 import java.time.LocalDate;
 
 public class Movimiento {
+
+  // Extracción y depósito podrían ser dos clases que hereden de movimiento o que usen su interfaz
+
   private LocalDate fecha;
   //En ningún lenguaje de programación usen jamás doubles para modelar dinero en el mundo real
   //siempre usen numeros de precision arbitraria, como BigDecimal en Java y similares
@@ -46,9 +49,9 @@ public class Movimiento {
   public void agregateA(Cuenta cuenta) {
     cuenta.setSaldo(calcularValor(cuenta));
     cuenta.agregarMovimiento(fecha, monto, esDeposito);
-  }
+  }  // este método apesta, la lógica de agregar un depósito debería estar en la cuenta
 
-  public double calcularValor(Cuenta cuenta) {
+  public double calcularValor(Cuenta cuenta) {  // este método nos muestra que claramente extracción y depósito deberían ser diferentes clases
     if (esDeposito) {
       return cuenta.getSaldo() + getMonto();
     } else {
