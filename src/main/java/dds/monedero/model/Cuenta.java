@@ -13,6 +13,7 @@ public class Cuenta {
 
   private double saldo;
   private List<Movimiento> movimientos = new ArrayList<>();
+  private double limiteExtraccionPorDia = 1000;
 
   public Cuenta() {
     saldo = 0;
@@ -39,14 +40,18 @@ public class Cuenta {
   }
 
   public void extraer(double cuanto) {
+    puedeExtraer(cuanto);
+    agregarMovimiento(LocalDate.now(), cuanto, false);
+  }
+
+  private void puedeExtraer(double cuanto) {
     esNegativo(cuanto);
     double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
-    double limite = 1000 - montoExtraidoHoy;  // no debería el límite estar dentro del método
+    double limite = this.limiteExtraccionPorDia - montoExtraidoHoy;
     if (cuanto > limite) {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
           + " diarios, límite: " + limite);
-    } // podría validar afuera
-    agregarMovimiento(LocalDate.now(), cuanto, false);
+    }
   }
 
   private void esNegativo(double cuanto) {
