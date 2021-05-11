@@ -32,7 +32,7 @@ public class Cuenta {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }   // cómo sabe que los movimientos son del día de hoy??
 
-    new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
+    agregarMovimiento(LocalDate.now(), cuanto, true);
   }
 
   public void extraer(double cuanto) {
@@ -43,7 +43,7 @@ public class Cuenta {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
           + " diarios, límite: " + limite);
     }
-    new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
+    agregarMovimiento(LocalDate.now(), cuanto, false);
   }
 
   private void esNegativo(double cuanto) {
@@ -52,8 +52,8 @@ public class Cuenta {
     }
   }
 
-  public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {  // teniendo este método, debería usarse en vez de hacer
-    Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);                 // new Movimiento cada vez que deposito o extraigo
+  public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
+    Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);
     movimientos.add(movimiento);
   }
 
