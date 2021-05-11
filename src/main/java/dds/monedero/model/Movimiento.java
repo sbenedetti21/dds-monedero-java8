@@ -49,7 +49,7 @@ public class Movimiento {
   public void agregateA(Cuenta cuenta) {
     cuenta.setSaldo(calcularValor(cuenta));
     cuenta.agregarMovimiento(fecha, monto, esDeposito);
-  }  // este método apesta, la lógica de agregar un depósito debería estar en la cuenta
+  }  // este método apesta, la lógica de agregar un depósito debería estar en la cuenta. Es un claro pasamanos
 
   public double calcularValor(Cuenta cuenta) {  // este método nos muestra que claramente extracción y depósito deberían ser diferentes clases
     if (esDeposito) {

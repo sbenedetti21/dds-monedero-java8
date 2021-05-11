@@ -24,13 +24,13 @@ public class Cuenta {
 
   public void setMovimientos(List<Movimiento> movimientos) {
     this.movimientos = movimientos;
-  } // deberían poder agregarse así los movimientos??
+  } // deberían poder agregarse así los movimientos?? no se si es un code smell, pero con el dominio no me cierra
 
   public void depositar(double cuanto) {
     esNegativo(cuanto);
-    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
+    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {  // podría usar fueDepositado()
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
-    }   // cómo sabe que los movimientos son del día de hoy??
+    }   // cómo sabe que los movimientos son del día de hoy??  Capaz podría ser un método aparte
 
     agregarMovimiento(LocalDate.now(), cuanto, true);
   }
@@ -42,7 +42,7 @@ public class Cuenta {
     if (cuanto > limite) {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
           + " diarios, límite: " + limite);
-    }
+    } // podría validar afuera
     agregarMovimiento(LocalDate.now(), cuanto, false);
   }
 
@@ -59,7 +59,7 @@ public class Cuenta {
 
   public double getMontoExtraidoA(LocalDate fecha) {
     return getMovimientos().stream()
-        .filter(movimiento -> !movimiento.isDeposito() && movimiento.getFecha().equals(fecha))
+        .filter(movimiento -> !movimiento.isDeposito() && movimiento.getFecha().equals(fecha))  // hay metodos para realizar esto en movimiento
         .mapToDouble(Movimiento::getMonto)
         .sum();
   }
@@ -75,5 +75,6 @@ public class Cuenta {
   public void setSaldo(double saldo) {
     this.saldo = saldo;
   }  // no esta bueno tener un método setSaldo, solo debería poder agregarse saldo a través de depositos.
+     // volviendo a pensar sobre esto, no creo que sea un code smell, sino que me suena raro pensando en el dominio.
 
 }
