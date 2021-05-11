@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Cuenta {
 
-  private double saldo; //inicializo el saldo en el constructor directamente
+  private double saldo;
   private List<Movimiento> movimientos = new ArrayList<>();
 
   public Cuenta() {
@@ -28,7 +28,7 @@ public class Cuenta {
 
   public void depositar(double cuanto) {
     esNegativo(cuanto);
-    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {  // podría usar fueDepositado()
+    if (getMovimientos().stream().filter(movimiento -> movimiento.fueDepositado(LocalDate.now())).count() >= 3) {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }   // cómo sabe que los movimientos son del día de hoy??  Capaz podría ser un método aparte
 
