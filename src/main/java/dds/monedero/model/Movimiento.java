@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Movimiento {
 
   // Extracción y depósito podrían ser dos clases que hereden de movimiento o que usen su interfaz
+  // Volviendo a mirar esto, pienso que capaz no hay razones suficientes para hacer dos clases por separado
 
   private LocalDate fecha;
   //En ningún lenguaje de programación usen jamás doubles para modelar dinero en el mundo real
@@ -47,7 +48,7 @@ public class Movimiento {
   }
 
   public double calcularValor(Cuenta cuenta) {  // este método nos muestra que claramente extracción y depósito deberían ser diferentes clases
-    if (esDeposito) {
+    if (esDeposito) {                           // Volviendo a mirar esto, pienso que capaz no hay razones suficientes para hacer dos clases por separado
       return cuenta.getSaldo() + getMonto();
     } else {
       return cuenta.getSaldo() - getMonto();
