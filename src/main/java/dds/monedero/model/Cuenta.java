@@ -11,12 +11,12 @@ import java.util.List;
 
 public class Cuenta {
 
-  private double saldo = 0;
+  private double saldo; //inicializo el saldo en el constructor directamente
   private List<Movimiento> movimientos = new ArrayList<>();
 
   public Cuenta() {
     saldo = 0;
-  } //raro inicializar el saldo en 0 cuando ya se inicializó arriba
+  }
 
   public Cuenta(double montoInicial) {
     saldo = montoInicial;
