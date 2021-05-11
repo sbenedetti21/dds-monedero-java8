@@ -26,7 +26,7 @@ public class Cuenta {
     this.movimientos = movimientos;
   } // deberían poder agregarse así los movimientos??
 
-  public void poner(double cuanto) {  // nombre de método poco expresivo
+  public void depositar(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }   // podría extraerse la lógica de chequear si el monto es negativo
@@ -38,7 +38,7 @@ public class Cuenta {
     new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
   }
 
-  public void sacar(double cuanto) {  // nombre de método poco expresivo
+  public void extraer(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
