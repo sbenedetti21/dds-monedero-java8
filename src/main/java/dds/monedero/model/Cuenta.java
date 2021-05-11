@@ -28,7 +28,6 @@ public class Cuenta {
 
   public void depositar(double cuanto) {
     esNegativo(cuanto);
-
     if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }   // cómo sabe que los movimientos son del día de hoy??
@@ -38,9 +37,6 @@ public class Cuenta {
 
   public void extraer(double cuanto) {
     esNegativo(cuanto);
-    if (getSaldo() - cuanto < 0) {
-      throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
-    }
     double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
     double limite = 1000 - montoExtraidoHoy;  // no debería el límite estar dentro del método
     if (cuanto > limite) {
