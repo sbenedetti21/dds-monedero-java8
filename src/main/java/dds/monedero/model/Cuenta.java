@@ -63,6 +63,15 @@ public class Cuenta {
   public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
     Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);
     movimientos.add(movimiento);
+    modificarSaldo(movimiento);
+  }
+
+  private void modificarSaldo(Movimiento movimiento) {
+    if (movimiento.isExtraccion()) {
+      this.saldo = this.saldo - movimiento.getMonto();
+    } else {
+      this.saldo = this.saldo + movimiento.getMonto();
+    }
   }
 
   public double getMontoExtraidoA(LocalDate fecha) {
