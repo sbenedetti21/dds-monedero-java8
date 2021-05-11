@@ -51,7 +51,7 @@ public class MonederoTest {
   void ExtraerMasQueElSaldo() {
     assertThrows(SaldoMenorException.class, () -> {
           cuenta.setSaldo(90);
-          cuenta.extraer(1001);
+          cuenta.extraer(688);
     });
   }
 
