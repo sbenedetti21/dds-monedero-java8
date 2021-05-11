@@ -27,12 +27,15 @@ public class Cuenta {
   } // deberían poder agregarse así los movimientos?? no se si es un code smell, pero con el dominio no me cierra
 
   public void depositar(double cuanto) {
+    puedeDepositar(cuanto);
+    agregarMovimiento(LocalDate.now(), cuanto, true);
+  }
+
+  private void puedeDepositar(double cuanto) {
     esNegativo(cuanto);
     if (getMovimientos().stream().filter(movimiento -> movimiento.fueDepositado(LocalDate.now())).count() >= 3) {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
-    }   // cómo sabe que los movimientos son del día de hoy??  Capaz podría ser un método aparte
-
-    agregarMovimiento(LocalDate.now(), cuanto, true);
+    }
   }
 
   public void extraer(double cuanto) {
