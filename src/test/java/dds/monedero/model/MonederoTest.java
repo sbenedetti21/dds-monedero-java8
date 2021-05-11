@@ -25,7 +25,7 @@ public class MonederoTest {
   }
 
   @Test
-  void PonerMontoNegativo() {
+  void DepositarMontoNegativo() {
     assertThrows(MontoNegativoException.class, () -> cuenta.depositar(-1500));
   }
 
