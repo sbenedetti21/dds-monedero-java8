@@ -34,7 +34,7 @@ public class MonederoTest {
     cuenta.depositar(1500);
     cuenta.depositar(456);
     cuenta.depositar(1900);
-
+    assertEquals(cuenta.getSaldo(), 1500+456+1900);
   }
 
   @Test
