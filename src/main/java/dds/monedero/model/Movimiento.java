@@ -47,11 +47,4 @@ public class Movimiento {
     return !esDeposito;
   }
 
-  public double calcularValor(Cuenta cuenta) {  // este método nos muestra que claramente extracción y depósito deberían ser diferentes clases
-    if (esDeposito) {                           // Volviendo a mirar esto, pienso que capaz no hay razones suficientes para hacer dos clases por separado
-      return cuenta.getSaldo() + getMonto();
-    } else {
-      return cuenta.getSaldo() - getMonto();
-    }
-  }
 }
