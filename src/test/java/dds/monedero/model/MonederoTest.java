@@ -68,6 +68,11 @@ public class MonederoTest {
     assertThrows(MontoNegativoException.class, () -> cuenta.extraer(-500));
   }
 
-  //TODO Agregar algunos tests
+  @Test
+  public void SiDeposito450PuedoRetirar450() {
+    cuenta.depositar(450);
+    cuenta.extraer(450);
+    assertEquals(cuenta.getSaldo(), 0);
+  }
 
 }
