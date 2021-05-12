@@ -75,4 +75,12 @@ public class MonederoTest {
     assertEquals(cuenta.getSaldo(), 0);
   }
 
+  @Test
+  public void SiDeposito450NoPuedoRetirar500() {
+    assertThrows(SaldoMenorException.class, () -> {
+        cuenta.depositar(450);
+        cuenta.extraer(500);
+        });
+  }
+
 }
